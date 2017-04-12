@@ -20,7 +20,7 @@ public class OpenGLActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature((Window.FEATURE_NO_TITLE));
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

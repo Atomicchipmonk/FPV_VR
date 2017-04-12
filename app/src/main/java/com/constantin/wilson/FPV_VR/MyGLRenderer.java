@@ -10,6 +10,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Surface;
 
 import com.google.vrtoolkit.cardboard.PhoneParams;
@@ -144,10 +145,14 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         mDecoderSurface=new Surface(mSurfaceTexture);
         mDecoder=new UdpStreamReceiver(mDecoderSurface,5000, mContext);
         mDecoder.startDecoding();
+
+
+
         mOSD=new MyOSDReceiverRenderer(mContext,textures,mLeftEyeViewM,mRightEyeViewM,mProjM,videoFormat, modelDistance, videoDistance,distortionCorrection);
         mOSD.startReceiving();
         mHeadTracker=HeadTracker.createFromContext(mContext);
         mHeadTracker.setNeckModelEnabled(true);
+
         final Phone.PhoneParams phoneParams = PhoneParams.readFromExternalStorage();
         if (phoneParams != null) {
             this.mHeadTracker.setGyroBias(phoneParams.gyroBias);
@@ -166,7 +171,13 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         //Setup Matrices
         if(enable_stereo_renderer){
             float ratio = (float) (width / 2) / height;
-            Matrix.frustumM(mProjM, 0, -ratio, ratio, -1, 1, 1.0f, 15.0f);
+
+
+            //heistand added to bring the whole projection down by .3 useful for Nexus 6P
+            Matrix.frustumM(mProjM, 0, -ratio, ratio, -.7f, 1.3f, 1.0f, 15.0f);
+           // Matrix.frustumM(mProjM, 0, -ratio, ratio, -1, 1, 1.0f, 15.0f);
+
+
             Matrix.setLookAtM(mLeftEyeViewM, 0, -(interpupilarryDistance / 2), 0.0f, 0.0f, 0.0f, 0.0f, -12, 0.0f, 1.0f, 0.0f);
             Matrix.setLookAtM(mRightEyeViewM, 0, (interpupilarryDistance / 2), 0.0f, 0.0f, 0.0f, 0.0f, - 12, 0.0f, 1.0f, 0.0f);
         }else{
@@ -177,42 +188,62 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         }
         Matrix.setIdentityM(mLeftEyeTranslate, 0);
         Matrix.setIdentityM(mRightEyeTranslate, 0);
-        Matrix.translateM(mLeftEyeTranslate, 0, (interpupilarryDistance / 2), 0.0f, 0);
-        Matrix.translateM(mRightEyeTranslate, 0, -(interpupilarryDistance / 2), 0.0f, 0);
+        Matrix.translateM(mLeftEyeTranslate, 0, (interpupilarryDistance / 2), 0.0f, 0f);
+        Matrix.translateM(mRightEyeTranslate, 0, -(interpupilarryDistance / 2), 0.0f, 0f);
         GLES20.glViewport(0, 0, width, height);
         mDisplay_x=width;
         mDisplay_y=height;
+
         mOSD.mDisplay_x=width;
         mOSD.mDisplay_y=height;
+
         leftViewportWidth=(int)((mDisplay_x/2*viewportScale));
         leftViewPortHeight=(int)((mDisplay_y*viewportScale));
         leftViewportX=(int)(((mDisplay_x/2)-leftViewportWidth)/2);
         leftViewPortY=(int)((mDisplay_y-leftViewPortHeight)/2);
+        Log.d("GLRenderer", "leftViewportWidth: " + leftViewportWidth);
         rightViewportWidth=leftViewportWidth;
         rightViewportHeight=leftViewPortHeight;
         rightViewportX=(mDisplay_x/2)+leftViewportX;
         rightViewportY=leftViewPortY;
+        Log.d("GLRenderer", "rightViewportWidth: " + rightViewportWidth);
+    }
+
+    public MyGLRenderer() {
+        super();
     }
 
     @Override
     public void onDrawFrame(GL10 glUnused) {
         double calculatingTB=System.currentTimeMillis();
         //Tell android this frame should have been displayed at the time it was created
+
+
+
+
         if(unlimitedOGLFps){
             EGLExt.eglPresentationTimeANDROID(EGL14.eglGetCurrentDisplay(),EGL14.eglGetCurrentSurface(EGL14.EGL_DRAW),System.nanoTime());
         }
+
         if(headTracking && mHeadTracker!=null){
             mHeadTracker.getLastHeadView(tempEyeViewM, 0);
             Matrix.multiplyMM(mLeftEyeViewM, 0,  mLeftEyeTranslate,  0, tempEyeViewM, 0);
             Matrix.multiplyMM(mRightEyeViewM, 0, mRightEyeTranslate, 0, tempEyeViewM, 0);
         }
+
         if(osd) {
             mOSD.setupModelMatrices();
         }
-        //GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
+
+        //This was blocked for some reason - unblocked it and everything works - Heistand
+        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
         //Danger: getTimestamp can't be used to compare with System.nanoTime or System.currentTimeMillis
         //because it's zero point depends on the sources providing the image;
+
+
         mSurfaceTexture.updateTexImage();
+
+
         //GLES20.glFinish();
         //GLES20.glFlush();
         mOGLProgramTexEx.beforeDraw(GLES20.GL_TEXTURE1,mTextureID,buffers[0]);
@@ -243,6 +274,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         zaehlerFramerate++;
         if((System.currentTimeMillis()-timeb)>1000) {
             fps = (double)(zaehlerFramerate / 1.0f);
+
             System.out.println("OpenGL fps:"+fps);
             if(fps >3 && mDecoder!=null && mOSD!=null){
                 mDecoder.tellOpenGLFps((long)fps);

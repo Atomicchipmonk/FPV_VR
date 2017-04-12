@@ -15,7 +15,7 @@ public class TextureViewActivity extends AppCompatActivity implements TextureVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
         mTextureView = new TextureView(this);
         mTextureView.setSurfaceTextureListener(this);
         setContentView(mTextureView);

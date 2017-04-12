@@ -77,7 +77,7 @@ public class LowLagDecoder {
         }
         System.out.println("Codec Info: " + decoder.getCodecInfo().getName());
         if(userDebug){ makeToast("Selected decoder: " + decoder.getCodecInfo().getName());}
-        format = MediaFormat.createVideoFormat("video/avc", 1920, 1080);
+        format = MediaFormat.createVideoFormat("video/avc", 1280, 720);
         format.setByteBuffer("csd-0",csd0);
         format.setByteBuffer("csd-1", csd1);
         try {
