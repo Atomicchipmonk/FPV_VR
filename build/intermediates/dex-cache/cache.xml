@@ -2,94 +2,103 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\FPV_VR\library\unspecified\jars\libs\libprotobuf-java-2.3-nano.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="/home/heisty/.android/build-cache/831eebef69575a2334f01ff85e2625c963d6deed/output/jars/classes.jar"
+        jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="ac2e8b80ab8545b61640b175168cd76e6bd5a3b4">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\libprotobuf-java-2.3-nano_af25713d41f82cf63410c57af5a2cd487e6df020.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\FPV_VR\library\unspecified\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
-        sha1="0937770786de992307ee7c4a43886c14b9ef7957">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\FPV_VR-library-unspecified_a19cb324c4cda55fec92669b1af7be4ae1290882.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_7d6eb68ff332f8c518e5d7fcf310421f56c4b20d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_88fa547798105a1e5bfecc1e4376bb009dc4399b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.1.0_4e92a4a38a4459140b34348a90c48262a5e1b8f1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
-        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.1.0_257e576a6d5b04f127bb3be80de22a5f1e392a54.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
+        revision="25.0.2"
         sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.1.1_c7722f5381e9130c018d281cb1d3ad9140b07976.jar" />
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_00ebe2eb6b135689c23d4c6bebef64792418a426/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="/home/heisty/.android/build-cache/3a2d04f2598d66d40fd7f4bbc5f5eadef6f1a69e/output/jars/classes.jar"
+        jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_dab8e5c88ce44c7a44c7201bbfd298ddfa169dc1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.1_2f6fb1c3ee217eb88dbd5c54072575f0d13db56d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
+        revision="25.0.2"
         sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="C:\Users\Constantin\Desktop\Android Studio Projects\FPV_VR\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_2fff5b4cc1794b61f76d40586146c0b66156ea78.jar" />
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d3f768755b03c94d0ebc3213c34cc229f39c8e10/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/.android/build-cache/3a2d04f2598d66d40fd7f4bbc5f5eadef6f1a69e/output/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.1.1_c7fb5bd79fa0fdf932761e7a86154766d4d24461/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/development/drone/FPV_VR/library/build/intermediates/bundles/default/libs/libprotobuf-java-2.3-nano.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ac2e8b80ab8545b61640b175168cd76e6bd5a3b4">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/8/libprotobuf-java-2.3-nano_45ab955753883a8c5d7d2de596f075c96af3e86a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/.android/build-cache/450269f2e1649bbb013817a0481ca2f883408afc/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7ce3ede0bdb7e49f37b98fc0d1db5580e6be621d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/development/drone/FPV_VR/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_558fa35973b0d954324e28c47ca677dab352a618/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/development/android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.1.1_26bb787dd36acd5bfb9f85e7952da026c8c129b1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/.android/build-cache/daf4e18d9f8e9e1eb7bcdc361b11e52cee08d20d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3de288dcc6c058a2da50ff7d0c5c1a4b803c46f5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/.android/build-cache/281f52459ebf60a3cf0b7edd2dd67179b0d37a4d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5518ded98a6ca7d0bff54113e0ba3fececc72fed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/development/drone/FPV_VR/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d5f23abe412539a3eb8aa4454b4a664973239298">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_de26eaca3976705b4e4e39cdee6572fe654aecad/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/heisty/.android/build-cache/fc09433f1993b3cb20d780827d66a47c7902b833/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/home/heisty/development/drone/FPV_VR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d900d23456d7518523888fd9dcc2d3f3862a5e6f/classes.dex" />
     </item>
 
 </items>

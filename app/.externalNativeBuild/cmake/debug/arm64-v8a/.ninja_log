@@ -1,9 +1,3 @@
 # ninja log v5
-0	86	0	CMakeFiles/parser.dir/app/src/main/c-ndk/parser.c.o	6b4cec70b51a9e97
-87	164	0	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libparser.so	c0db36836aa90134
-2	80	0	CMakeFiles/parser.dir/app/src/main/c-ndk/parser.c.o	6b4cec70b51a9e97
-80	117	0	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libparser.so	c0db36836aa90134
-2	1300	0	CMakeFiles/parser.dir/app/src/main/c-ndk/parser.c.o	6b4cec70b51a9e97
-1301	1885	0	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libparser.so	c0db36836aa90134
-26	1292	0	CMakeFiles/parser.dir/app/src/main/c-ndk/parser.c.o	6b4cec70b51a9e97
-1293	2040	0	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libparser.so	c0db36836aa90134
+0	81	0	CMakeFiles/parser.dir/app/src/main/c-ndk/parser.c.o	489637d85542e975
+83	104	0	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libparser.so	3959148c2ec93068

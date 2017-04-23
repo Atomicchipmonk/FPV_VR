@@ -6,6 +6,7 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.preference.PreferenceManager;
 import android.content.Context;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -18,7 +19,7 @@ import java.nio.FloatBuffer;
 //Threads: 2, first for refreshing the Overdraw Canvas, second for receiving udp data
 public class MyOSDReceiverRenderer {
     private OGLProgramColor mOGLProgramColor;
-    private DatagramSocket s = null;
+    private TelemetryParser tP;
     private Thread circularRefreshThread,receiveFromUDPThread;
     private volatile boolean running=true;
     private boolean countUp1=true,countUp2=true,countUp3=true,countUp4true;
@@ -39,7 +40,7 @@ public class MyOSDReceiverRenderer {
     //Circular refreshing
     private int circular_refresh_count=0;
     //Booleans for OSD
-    private boolean LTM,FRSKY;
+    private boolean LTM,FRSKY,MAVLINK;
     private boolean enable_model;
     private boolean invert_yaw,invert_roll,invert_pitch;
     private boolean enable_home_arrow;
@@ -73,8 +74,12 @@ public class MyOSDReceiverRenderer {
 
     public MyOSDReceiverRenderer(Context context, int[] textures,float[] leftEyeViewM,float[] rightEyeViewM,float[] projectionM,float videoFormat,float modelDistance,float videoDistance,boolean distortionCorrection){
         SharedPreferences settings= PreferenceManager.getDefaultSharedPreferences(context);
+
+
+        //Load settings
         LTM=settings.getBoolean("ltm", false);
         FRSKY=settings.getBoolean("frsky", false);
+        MAVLINK=settings.getBoolean("mavlink", true);
         invert_yaw=settings.getBoolean("invert_yaw", false);
         invert_roll=settings.getBoolean("invert_roll", false);
         invert_pitch=settings.getBoolean("invert_pitch", false);
@@ -90,6 +95,9 @@ public class MyOSDReceiverRenderer {
         enable_X3=settings.getBoolean("enable_x3", true);
         enable_speed=settings.getBoolean("enable_speed", true);
         enable_X4=settings.getBoolean("enable_x4", true);
+
+
+        //Load OpenGL items
         kopterHArrowVerUV = OpenGLHelper.getFloatBuffer(MyOSDReceiverRendererHelper.getTriangleCoords());
         GLES20.glGenBuffers(1, buffer, 0);
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, buffer[0]);
@@ -103,12 +111,17 @@ public class MyOSDReceiverRenderer {
         mOverdrawLayer=new OverdrawLayer(textures,videoFormat,videoDistance,mProjM,distortionCorrection,
                 enable_battery_life, enable_latitude_longitude,enable_rssi,enable_X2,enable_height,enable_voltage,
                 enable_ampere,enable_X3,enable_speed,enable_X4);
-        init();
-        receiveFromUDPThread=new Thread(){
-            @Override
-            public void run() {
-                receiveFromUDP();}
-        };
+
+        //Identify parser
+        if(LTM){
+            tP = new LTMParser(5010);
+        } else if (FRSKY) {
+            tP = new FRSKYParser(5011);
+        } else if (MAVLINK) {
+            Log.d("MyOSDReceiverRenderer", "Starting mavlink parser");
+            tP = new MavlinkParser(14550, context);
+        }
+
         circularRefreshThread=new Thread(){
             @Override
             public void run() {
@@ -117,10 +130,11 @@ public class MyOSDReceiverRenderer {
     }
     public void startReceiving(){
         running=true;
-        receiveFromUDPThread.start();
+        tP.start();
         circularRefreshThread.start();
     }
     public void stopReceiving(){
+        tP.stop();
         running=false;
     }
 
@@ -149,18 +163,18 @@ public class MyOSDReceiverRenderer {
             switch(circular_refresh_count){
                 case  1: createUnitVerticesDataAndUpdateBuffer(0, mDecoder_fps);break;
                 case  2: createUnitVerticesDataAndUpdateBuffer(1, mOpenGL_fps);break;
-                case  3: createUnitVerticesDataAndUpdateBuffer(2, getLatitude()); break;
-                case  4: createUnitVerticesDataAndUpdateBuffer(3, getLongitude()); break;
+                case  3: createUnitVerticesDataAndUpdateBuffer(2, tP.getLatitude()); break;
+                case  4: createUnitVerticesDataAndUpdateBuffer(3, tP.getLongitude()); break;
                 case  5: createUnitVerticesDataAndUpdateBuffer(4, mBattery_life_percentage); break;
-                case  6: createUnitVerticesDataAndUpdateBuffer(5, getVoltage()       );break;
-                case  7: createUnitVerticesDataAndUpdateBuffer(6, getRSSI() );break;
-                case  8: createUnitVerticesDataAndUpdateBuffer(7, getAmpere()) ;break;
+                case  6: createUnitVerticesDataAndUpdateBuffer(5, tP.getVoltage()       );break;
+                case  7: createUnitVerticesDataAndUpdateBuffer(6, tP.getRSSI() );break;
+                case  8: createUnitVerticesDataAndUpdateBuffer(7, tP.getAmpere()) ;break;
                 case  9: createUnitVerticesDataAndUpdateBuffer(8, i );break;
                 case 10: createUnitVerticesDataAndUpdateBuffer(9, i );break;
-                case 11: createUnitVerticesDataAndUpdateBuffer(10, getSpeed() );break;
+                case 11: createUnitVerticesDataAndUpdateBuffer(10, tP.getSpeed() );break;
                 case 12: createUnitVerticesDataAndUpdateBuffer(11, i);break;
-                case 13: createUnitVerticesDataAndUpdateBuffer(12, getBaroAltitude());break;
-                case 14: createUnitVerticesDataAndUpdateBuffer(13, getAltitude() );circular_refresh_count=0;break;
+                case 13: createUnitVerticesDataAndUpdateBuffer(12, tP.getBaroAltitude());break;
+                case 14: createUnitVerticesDataAndUpdateBuffer(13, tP.getAltitude() );circular_refresh_count=0;break;
                 default:break;
             }
         }
@@ -174,48 +188,16 @@ public class MyOSDReceiverRenderer {
         }
     }
 
-    private void receiveFromUDP() {
-        int server_port = 5001;
-        byte[] message = new byte[1024];
-        DatagramPacket p = new DatagramPacket(message, message.length);
-        boolean exception=false;
-        try {s = new DatagramSocket(server_port);
-            s.setSoTimeout(500);
-        } catch (SocketException e) {e.printStackTrace();}
-        while (running && s != null) {
-            try {
-                s.receive(p);
-            } catch (IOException e) {
-                exception=true;
-                if(! (e instanceof SocketTimeoutException)){
-                    e.printStackTrace();
-                }
-            }
-            if(!exception){
-                System.out.println("Receiving OSD Data; Parsing required; length:"+p.getLength());
-                //we have to parse Telemetry Data
-                if(LTM){
-                    parseLTM(message,p.getLength());
-                }
-                if(FRSKY){
-                    parseFRSKY(message,p.getLength());
-                }
-            }else{exception=false;}
-        }
-        if (s != null) {
-            s.close();
-            s=null;
-        }
-    }
+
 
     public void setupModelMatrices(){
-        angle_x=getPitch();
-        angle_y=getYaw();
-        angle_z=getRoll();
+        angle_x=tP.getPitch();
+        angle_y=tP.getYaw();
+        angle_z=tP.getRoll();
         if(invert_yaw){angle_y*=-1;}
         if(invert_roll){angle_z*=-1;}
         if(invert_pitch){angle_x*=-1;}
-        mHeight_m=getAltitude(); //or baro altitude ?
+        mHeight_m=tP.getAltitude(); //or baro altitude ?
         /*if(countUp1){angle_z +=0.2;}else{angle_z -=0.2;}if(angle_z >=40){countUp1=false;}if(angle_z <=-40){countUp1=true;}
         //up_down
         if(countUp2){angle_x +=0.2;}else{angle_x -=0.2;}if(angle_x >=40){countUp2=false;}if(angle_x <=-40){countUp2=true;}
@@ -323,6 +305,5 @@ public class MyOSDReceiverRenderer {
     private static native float getPitch();
     private static native float getYaw();
     private static native float getRSSI();
-
 
 }

@@ -1,9 +1,9 @@
-set(CMAKE_HOST_SYSTEM "Windows-6.3.9600")
-set(CMAKE_HOST_SYSTEM_NAME "Windows")
-set(CMAKE_HOST_SYSTEM_VERSION "6.3.9600")
-set(CMAKE_HOST_SYSTEM_PROCESSOR "AMD64")
+set(CMAKE_HOST_SYSTEM "Linux-4.4.0-62-generic")
+set(CMAKE_HOST_SYSTEM_NAME "Linux")
+set(CMAKE_HOST_SYSTEM_VERSION "4.4.0-62-generic")
+set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
-include("C:/Users/Constantin/AppData/Local/Android/sdk/ndk-bundle/build/cmake/android.toolchain.cmake")
+include("/home/heisty/development/android/sdk/ndk-bundle/build/cmake/android.toolchain.cmake")
 
 set(CMAKE_SYSTEM "Android-21")
 set(CMAKE_SYSTEM_NAME "Android")

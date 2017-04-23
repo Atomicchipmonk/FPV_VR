@@ -2,7 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+
+    buildToolsVersion "25.0.2"
+
 
     defaultConfig {
         applicationId "com.constantin.wilson.FPV_VR"
@@ -37,4 +39,9 @@ dependencies {
     /*compile 'org.jcodec:jcodec-android:0.1.9'*/
     compile project(':library')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+
+    compile(name:'dronekit-android.3.0.2', ext:'aar')
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    compile 'com.github.zafarkhaja:java-semver:0.9.0'
+    compile 'com.google.android.gms:play-services:10.2.0'
 }
